@@ -1,4 +1,6 @@
 'use strict';
+global.localLog = [];
+global.services = {};
 
 const express = require('express');
 const app = express();
@@ -13,9 +15,17 @@ app.use(timeStamp);
 const logger = require('./src/middleware/logger.js');
 app.use(logger);
 
-//router
-const router = require('./src/route/router.js');
-app.use(router);
+//routers
+const authRouter = require('./src/route/auth/authRouter.js');
+app.use('/api/v1/auth',authRouter);
+
+// const blogRouter = require('./src/route/blog/blogRouter.js');
+// app.use('/api/v1/blog',blogRouter);
+
+// route for micro services to register with Gate way.
+const registerHandler = require('./src/route/serviceRegisterHandler.js');
+app.post('/service-register', registerHandler);
+
 
 // routes error handlers
 const fourOfour = require('./src/middleware/404');
@@ -29,6 +39,8 @@ const port = process.env.PORT || 4444;
 app.listen(port, ()=>{
   console.log(`listening on port ${port}`);
 });
+
+
 
 
 
