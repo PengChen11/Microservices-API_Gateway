@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/PengChen11/Microservices-API_Gateway/issues"
   },
-  "homepage": "https://github.com/PengChen11/Microservices-API_Gateway#readme"
+  "homepage": "https://github.com/PengChen11/Microservices-API_Gateway#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "base-64": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
 }
