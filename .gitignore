@@ -5,7 +5,7 @@ ENV/
 .DS_Store
 .history
 .eslintcache
-/coverage
+coverage/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
