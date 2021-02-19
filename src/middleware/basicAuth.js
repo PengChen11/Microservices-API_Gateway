@@ -21,6 +21,7 @@ module.exports = async (req, res, next)=>{
   }
 
   const authServiceURL = loadBalancer(global.services['authService']);
+  
   const authServiceError = {'message_spec': 'User Authentication service is currently off line, please try again later', 'statusCode': 410, 'statusMessage': 'Connection Error' };
 
   if (authServiceURL) {
@@ -37,7 +38,6 @@ module.exports = async (req, res, next)=>{
     try{
       const response = await axios(reqConfig);
       req.token = response.data.token;
-      req.username = response.data.username;
       next();
       return;
     }

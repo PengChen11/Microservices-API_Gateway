@@ -1,17 +1,19 @@
 'use strict';
 
-module.exports = (urlArray) =>{
+module.exports = (service) =>{
 
-  if (!Array.isArray(urlArray)) {
+  if (!service || !Array.isArray(service.urls)) {
     return;
   }
 
-  if (urlArray.length === 1) {
-    return urlArray[0];
+  if (service.urls.length === 1) {
+    return service.urls[0];
 
   } else {
-    const index = Math.floor(Math.random()*urlArray.length);
-    return urlArray[index];
-  }
 
-}
+    const nextIndex = (service.currentIndex + 1 === service.urls.length ) ? 0 : service.currentIndex + 1;
+    service.currentIndex = nextIndex;
+
+    return service.urls[nextIndex];
+  }
+};
