@@ -86,6 +86,8 @@ function handlerGenerator (method){
     const id = req.params.id;
     let reqConfig;
 
+    if (!authServiceURL) next(authServiceError);
+
     switch(method){
 
       case 'findAll': 

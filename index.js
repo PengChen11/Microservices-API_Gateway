@@ -27,8 +27,8 @@ app.use('/api/v1/auth',authRouter);
 // const authRouterV2 = require('./src/route/auth/authRouterV2.js');
 // app.use('/api/v2/auth',authRouterV2);
 
-// const blogRouter = require('./src/route/blog/blogRouter.js');
-// app.use('/api/v1/blog',blogRouter);
+const blogRouter = require('./src/route/blog/blogRouter.js');
+app.use('/api/v1/blog',blogRouter);
 
 
 // routes error handlers
