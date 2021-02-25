@@ -19,7 +19,12 @@ const {signup, adminSignup, signin, getAll, getOne, updateOne, updatePassword, d
 
 authRouter.post('/signup', roleValidation, signup);
 
-authRouter.post('/adminsignup', bearerAuth, adminValidation, adminSignup); // admin signup, admin can be only added by another admin.
+// admin signup, admin can be only added by another admin.
+authRouter.post('/adminsignup', bearerAuth, adminValidation, adminSignup); 
+
+// micerservice signup, microservice can only be added by admin.
+authRouter.post('/servicesignup', bearerAuth, adminValidation, adminSignup); 
+
 
 authRouter.post('/signin', basicAuth, signin);
 
