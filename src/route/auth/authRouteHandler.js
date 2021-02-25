@@ -39,21 +39,24 @@ async function signup (req, res, next){
 
 async function adminSignup (req, res, next){
 
-  const missingKeyError = { 'message_spec': 'username, password are required when registering a new user, please try again', 'statusCode': 400, 'statusMessage': 'Missing user data' };
+  const missingKeyError = { 'message_spec': 'username, password and role are required when registering a new admin or microservice, please try again', 'statusCode': 400, 'statusMessage': 'Missing user data' };
 
-  if (!req.body.username || !req.body.password) {
+  if (!req.body.username || !req.body.password || !req.body.role) {
     next(missingKeyError);
     return;
   }
+
+  if (!['admin', 'service'].includes(req.body.role) ) {
+    next(missingKeyError);
+    return;
+  }
+
   const authServiceURL = loadBalancer(global.services['authService']);
   if (authServiceURL) {
     const reqConfig = {
       method: 'post',
       url: `${authServiceURL}${req.path}`,
-      data: {
-        ...req.body,
-        role: 'admin',
-      },
+      data: req.body,
       headers: {
         Authorization: `Bearer ${req.token}`,
       },
@@ -140,6 +143,7 @@ function handlerGenerator (method){
             Authorization: `Bearer ${req.token}`,
           },
         }; 
+        break;
     }
 
     try {

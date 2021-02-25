@@ -1,6 +1,20 @@
 # Microservices: API Gateway
 
-This is my first time using microservice architecture to build a backend system to power up all my apps, and it will continue growing to support all my future development too.
+This is my first time using microservice architecture to build a backend system to power up all my apps and blog website, and it will continue growing to support all my future development too.
+
+![architecture-image](./docs/img/architecture.png)
+
+The blog website front end is still under development:
+[pengchen.work](https://github.com/PengChen11/pengchen.work)
+Tech will be used: NextJS (Mainly for SEO)
+
+Currently I have the following services in development:
+
+**Authentication service** : for user security concern, it is made private.
+
+[Blog service](https://github.com/PengChen11/Microservices-Blog)
+
+[System monitoring service](https://github.com/PengChen11/Microservices-Sys_Monitor)
 
 ## Table of Contents
 

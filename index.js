@@ -30,6 +30,9 @@ app.use('/api/v1/auth',authRouter);
 const blogRouter = require('./src/route/blog/blogRouter.js');
 app.use('/api/v1/blog',blogRouter);
 
+const monitorRouter = require('./src/route/monitor/monitorRouter.js');
+app.use('/api/v1/monitor',monitorRouter);
+
 
 // routes error handlers
 const fourOfour = require('./src/middleware/404');

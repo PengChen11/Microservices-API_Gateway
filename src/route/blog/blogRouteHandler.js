@@ -31,9 +31,6 @@ function handlerGenerator (method){
         reqConfig = {
           method: 'get',
           url: `${blogServiceURL}/${modelPath}`,
-          // headers: {
-          //   Authorization: `Bearer ${req.token}`,
-          // },
         }; 
         break;
 
@@ -41,9 +38,6 @@ function handlerGenerator (method){
         reqConfig = {
           method: 'get',
           url: `${blogServiceURL}/${modelPath}/${id}`,
-          // headers: {
-          //   Authorization: `Bearer ${req.token}`,
-          // },
         }; 
         break;
 
@@ -51,9 +45,6 @@ function handlerGenerator (method){
         reqConfig = {
           method: 'patch',
           url: `${blogServiceURL}/${modelPath}/${id}`,
-          // headers: {
-          //   Authorization: `Bearer ${req.token}`,
-          // },
           data: req.body,
         }; 
         break;
@@ -62,9 +53,6 @@ function handlerGenerator (method){
         reqConfig = {
           method: 'post',
           url: `${blogServiceURL}/${modelPath}`,
-          // headers: {
-          //   Authorization: `Bearer ${req.token}`,
-          // },
           data: req.body,
         }; 
         break;
@@ -74,9 +62,6 @@ function handlerGenerator (method){
         reqConfig = {
           method: 'delete',
           url: `${blogServiceURL}/${modelPath}/${id}`,
-          // headers: {
-          //   Authorization: `Bearer ${req.token}`,
-          // },
         };
     }
 
