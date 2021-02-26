@@ -2,7 +2,7 @@
 const base64 = require('base-64');
 const axios = require('axios');
 const loadBalancer = require('../tool/loadBalancer.js');
-
+const axiosErrorHandler = require('../tool/axiosErrorHandler.js');
 
 module.exports = async (req, res, next)=>{
 
@@ -42,9 +42,7 @@ module.exports = async (req, res, next)=>{
       return;
     }
     catch (error) {
-      const signinError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-      next(signinError);
-      return;
+      axiosErrorHandler(error, authServiceError, next,'authService', authServiceURL);
     }
   }else {
     next(authServiceError);

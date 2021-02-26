@@ -1,6 +1,13 @@
 'use strict';
+require('dotenv').config();
+
 global.localLog = [];
-global.services = {};
+global.services = {
+  authService: {
+    urls:[process.env.AUTH_SERVICE_URL],
+    currentIndex: 0,
+  },
+};
 
 const express = require('express');
 const app = express();
@@ -15,12 +22,12 @@ app.use(timeStamp);
 const logger = require('./src/middleware/logger.js');
 app.use(logger);
 
-// route for micro services to register with Gate way.
-const registerHandler = require('./src/route/serviceRegisterHandler.js');
-app.post('/service-register', registerHandler);
-
 
 //routers
+const registerRouter = require('./src/route/serviceRegisterRouter.js');
+app.use('/api/v1', registerRouter);
+
+
 const authRouter = require('./src/route/auth/authRouter.js');
 app.use('/api/v1/auth',authRouter);
 
@@ -45,10 +52,8 @@ app.use(svrErrors);
 const port = process.env.PORT || 4444;
 app.listen(port, ()=>{
   console.log(`listening on port ${port}`);
+  console.log(' curernt service list:', global.services);
 });
-
-module.exports = app;
-
 
 
 

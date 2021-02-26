@@ -10,7 +10,7 @@ jest.mock('axios');
 // to get rid of all console logs, make it clean
 console.log = jest.fn();
 
-test('good response', () => {
+test.skip('good response', () => {
   axios.get.mockImplementation(() => Promise.resolve({ data: {a: 1} }));
   // ...
 });

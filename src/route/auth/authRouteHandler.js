@@ -1,7 +1,7 @@
 'use strict';
 const axios = require('axios');
 const loadBalancer = require('../../tool/loadBalancer.js');
-
+const axiosErrorHandler = require('../../tool/axiosErrorHandler.js');
 
 const authServiceError = {'message_spec': 'User Authentication service is currently off line, please try again later', 'statusCode': 410, 'statusMessage': 'Connection Error' };
 
@@ -11,7 +11,6 @@ async function signup (req, res, next){
 
   if (!req.body.username || !req.body.password) {
     next(missingKeyError);
-    return;
   }
   const authServiceURL = loadBalancer(global.services['authService']);
   if (authServiceURL) {
@@ -26,14 +25,11 @@ async function signup (req, res, next){
       res.status(200).send(data);
 
     } catch( error ){
-      const signupError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-      next(signupError);
-      return;
+      axiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
     }
 
   } else {
     next(authServiceError);
-    return;
   }
 }
 
@@ -67,14 +63,11 @@ async function adminSignup (req, res, next){
       res.status(200).send(data);
 
     } catch( error ){
-      const signupError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-      next(signupError);
-      return;
+      axiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
     }
 
   } else {
     next(authServiceError);
-    return;
   }
 }
 
@@ -151,8 +144,7 @@ function handlerGenerator (method){
       res.status(200).send(data);
     }
     catch (error){
-      const reqError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-      next(reqError);
+      axiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
     }
   };
 }

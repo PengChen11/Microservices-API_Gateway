@@ -1,8 +1,9 @@
 'use strict';
 const axios = require('axios');
 const loadBalancer = require('../../tool/loadBalancer.js');
+const axiosErrorHandler = require('../../tool/axiosErrorHandler.js');
 
-const monitorServiceError = {'message_spec': 'Blog service is currently off line, please try again later', 'statusCode': 410, 'statusMessage': 'Connection Error' };
+const monitorServiceError = {'message_spec': 'System monitoring service is currently off line, please try again later', 'statusCode': 410, 'statusMessage': 'Connection Error' };
 
 function handlerGenerator (method){
   
@@ -19,7 +20,7 @@ function handlerGenerator (method){
     const serviceName = req.params.service_name;
     const modelPath = req.params.model;
     // if requesting path is not projects nor articles, user get 404
-    if (modelPath !='projects' && modelPath != 'articles') {
+    if (!['events', 'warnings', 'errors'].includes(modelPath)) {
       next();
       return;
     }
@@ -79,8 +80,7 @@ function handlerGenerator (method){
       res.status(200).send(data);
     }
     catch (error){
-      const reqError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-      next(reqError);
+      axiosErrorHandler(error, monitorServiceError, next, 'monitorService', monitorServiceURL);
     }
   };
 }
