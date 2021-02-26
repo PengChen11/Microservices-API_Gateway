@@ -8,28 +8,23 @@ module.exports = (req, res, next) =>{
         urls : [req.body.service_url],
         currentIndex : 0,
       };
-      res.status(200).send('new register');
-      res.end();
+      return res.status(200).send('new register');
 
-    } else {
-      if (!global.services[req.body.service_name].urls.includes(req.body.service_url)){
+    } else if (!global.services[req.body.service_name].urls.includes(req.body.service_url)){
 
-        global.services[req.body.service_name] = {
-          ...global.services[req.body.service_name],
-          urls: [...global.services[req.body.service_name].urls, req.body.service_url],
-        };
-        res.status(200).send('new register');
-        res.end();
-      } 
-    }
+      global.services[req.body.service_name] = {
+        ...global.services[req.body.service_name],
+        urls: [...global.services[req.body.service_name].urls, req.body.service_url],
+      };
+      return res.status(200).send('new register');
+    } 
     
     res.status(200).send('existing service');
-    res.end();
 
     // delete when deploying
     console.log('global services ', global.services);
   }
   catch (error){
-    next (error);
+    next ('****** service register handler error',error);
   }
 };
