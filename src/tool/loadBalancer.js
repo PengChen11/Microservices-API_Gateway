@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (service) =>{
-
+  
   if (!service || !Array.isArray(service.urls)) {
     return;
   }

@@ -1,6 +1,7 @@
 'use strict';
 const axios = require('axios');
 const loadBalancer = require('../../tool/loadBalancer.js');
+const axiosErrorHandler = require('../../tool/axiosErrorHandler.js');
 
 const monitorServiceError = {'message_spec': 'Blog service is currently off line, please try again later', 'statusCode': 410, 'statusMessage': 'Connection Error' };
 
@@ -79,8 +80,7 @@ function handlerGenerator (method){
       res.status(200).send(data);
     }
     catch (error){
-      const reqError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-      next(reqError);
+      axiosErrorHandler(error, monitorServiceError, next, 'monitorService', monitorServiceURL);
     }
   };
 }
