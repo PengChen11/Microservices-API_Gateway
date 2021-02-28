@@ -1,7 +1,7 @@
 'use strict';
 const axios = require('axios');
 const loadBalancer = require('../../tool/loadBalancer.js');
-const axiosErrorHandler = require('../../tool/axiosErrorHandler.js');
+const middlewareAxiosErrorHandler = require('../../tool/middlewareAxiosErrorHandler.js');
 
 const authServiceError = {'message_spec': 'User Authentication service is currently off line, please try again later', 'statusCode': 410, 'statusMessage': 'Connection Error' };
 
@@ -25,7 +25,7 @@ async function signup (req, res, next){
       res.status(200).send(data);
 
     } catch( error ){
-      axiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
+      middlewareAxiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
     }
 
   } else {
@@ -63,7 +63,7 @@ async function adminSignup (req, res, next){
       res.status(200).send(data);
 
     } catch( error ){
-      axiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
+      middlewareAxiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
     }
 
   } else {
@@ -144,7 +144,7 @@ function handlerGenerator (method){
       res.status(200).send(data);
     }
     catch (error){
-      axiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
+      middlewareAxiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
     }
   };
 }

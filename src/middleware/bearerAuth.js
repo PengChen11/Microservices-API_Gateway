@@ -1,11 +1,11 @@
 'use strict';
 const axios = require('axios');
 const loadBalancer = require('../tool/loadBalancer.js');
-const axiosErrorHandler = require('../tool/axiosErrorHandler.js');
+const middlewareAxiosErrorHandler = require('../tool/middlewareAxiosErrorHandler.js');
 
 module.exports = async (req, res, next) => {
 
-  const authenticationErr = {message_spec: 'You are not authenticated. Please login again.', statusCode: 401, statusMessage:'Unauthenticated'};
+  const authenticationErr = {message_spec: 'User can NOT be authenticated. Please login again.', statusCode: 401, statusMessage:'Unauthenticated'};
 
   if (!req.headers.authorization) {
     next(authenticationErr);
@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
       next();
     }
     catch (error) {
-      axiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
+      middlewareAxiosErrorHandler(error, authServiceError, next, 'authService', authServiceURL);
     }
   }else {
     next(authServiceError);

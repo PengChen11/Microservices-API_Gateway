@@ -11,19 +11,20 @@ const bearerAuth = require('../../middleware/bearerAuth.js');
 const adminValidation = require('../../middleware/adminValidation.js');
 const userValidation = require('../../middleware/userValidation.js');
 const roleValidation = require('../../middleware/roleValidation.js');
+const dataValidation = require('../../middleware/dataValidation.js');
 
 // all routes handlers
 const {signup, adminSignup, signin, getAll, getOne, updateOne, updatePassword, deleteOne} = require('./authRouteHandler.js');
 
 // user authentication service routes
 
-authRouter.post('/signup', roleValidation, signup);
+authRouter.post('/signup', roleValidation, dataValidation, signup);
 
 // admin signup, admin can be only added by another admin.
-authRouter.post('/adminsignup', bearerAuth, adminValidation, adminSignup); 
+authRouter.post('/adminsignup', bearerAuth, adminValidation, dataValidation, adminSignup); 
 
 // micerservice signup, microservice can only be added by admin.
-authRouter.post('/servicesignup', bearerAuth, adminValidation, adminSignup); 
+authRouter.post('/servicesignup', bearerAuth, adminValidation, dataValidation, adminSignup); 
 
 
 authRouter.post('/signin', basicAuth, signin);

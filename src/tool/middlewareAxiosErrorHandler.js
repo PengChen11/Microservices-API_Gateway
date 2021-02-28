@@ -8,12 +8,10 @@ module.exports = (error, noConnectionErr, next, serviceName, serviceURL)=>{
     // fire up moitor
     
     serviceRemover(serviceName, serviceURL);
-    console.log('updated global list: ', global.services);
     return next(noConnectionErr);
   } else {
     const receivedError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-    console.log('updated global list: ', global.services);
     return next(receivedError);
-    // fire up minitor
+
   }
 };

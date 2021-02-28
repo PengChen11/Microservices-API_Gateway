@@ -1,7 +1,7 @@
 'use strict';
 const axios = require('axios');
 const loadBalancer = require('../../tool/loadBalancer.js');
-const axiosErrorHandler = require('../../tool/axiosErrorHandler.js');
+const middlewareAxiosErrorHandler = require('../../tool/middlewareAxiosErrorHandler.js');
 
 const monitorServiceError = {'message_spec': 'System monitoring service is currently off line, please try again later', 'statusCode': 410, 'statusMessage': 'Connection Error' };
 
@@ -80,7 +80,7 @@ function handlerGenerator (method){
       res.status(200).send(data);
     }
     catch (error){
-      axiosErrorHandler(error, monitorServiceError, next, 'monitorService', monitorServiceURL);
+      middlewareAxiosErrorHandler(error, monitorServiceError, next, 'monitorService', monitorServiceURL);
     }
   };
 }
