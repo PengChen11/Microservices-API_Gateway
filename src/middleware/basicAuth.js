@@ -2,7 +2,7 @@
 const base64 = require('base-64');
 const axios = require('axios');
 const loadBalancer = require('../tool/loadBalancer.js');
-const axiosErrorHandler = require('../tool/axiosErrorHandler.js');
+const middlewareAxiosErrorHandler = require('../tool/middlewareAxiosErrorHandler.js');
 
 module.exports = async (req, res, next)=>{
 
@@ -42,7 +42,7 @@ module.exports = async (req, res, next)=>{
       return;
     }
     catch (error) {
-      axiosErrorHandler(error, authServiceError, next,'authService', authServiceURL);
+      middlewareAxiosErrorHandler(error, authServiceError, next,'authService', authServiceURL);
     }
   }else {
     next(authServiceError);

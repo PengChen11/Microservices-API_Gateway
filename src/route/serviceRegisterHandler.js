@@ -25,6 +25,6 @@ module.exports = (req, res, next) =>{
     console.log('global services ', global.services);
   }
   catch (error){
-    next ('****** service register handler error',error);
+    next (error);
   }
 };
