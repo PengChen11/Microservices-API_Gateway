@@ -3,7 +3,7 @@ const loadBalancer = require('../../src/tool/loadBalancer.js');
 
 const services = {};
 
-describe.skip (' load balancer tests', ()=> {
+describe(' load balancer tests', ()=> {
 
   it('testing to return nothing if given data is broken', ()=>{
     const service = {

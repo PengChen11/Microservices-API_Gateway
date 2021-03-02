@@ -1,8 +1,16 @@
 'use strict';
 // require( 'dotenv' ).config();
-const server = require( '../../index.js' );
+const {server} = require( '../../src/server.js' );
 const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose( server );
+const axios = require('axios');
+jest.mock('axios');
+
+// mock all my middlewares
+jest.mock('../../src/middleware/bearerAuth.js', ()=>jest.fn((req, res, next)=>next()));
+
+jest.mock('../../src/middleware/serviceValidation.js', ()=>jest.fn((req,res,next)=>next()));
+
 
 // to get rid of all console logs, make it clean
 console.log = jest.fn();
@@ -19,7 +27,7 @@ afterEach ((done)=>{
 });
 
 
-describe.skip ('tests for service registering route', ()=>{
+describe('tests for service registering route', ()=>{
 
   it('should register new services url', async()=>{
     const serviceData= {
@@ -27,7 +35,7 @@ describe.skip ('tests for service registering route', ()=>{
       service_url: 'http://test1.com',
     };
 
-    const result = await mockRequest.post('/service-register').send(serviceData);
+    const result = await mockRequest.post('/api/v1/service-register').send(serviceData);
 
     expect(result.status).toBe(200);
 
@@ -43,7 +51,7 @@ describe.skip ('tests for service registering route', ()=>{
       service_url: 'http://test2.com',
     };
 
-    const result = await mockRequest.post('/service-register').send(blogService);
+    const result = await mockRequest.post('/api/v1/service-register').send(blogService);
 
     expect(result.status).toBe(200);
 
@@ -56,7 +64,7 @@ describe.skip ('tests for service registering route', ()=>{
       service_url: 'http://test1.com',
     };
 
-    const result2 = await mockRequest.post('/service-register').send(authService);
+    const result2 = await mockRequest.post('/api/v1/service-register').send(authService);
 
     expect(result2.status).toBe(200);
 
@@ -77,9 +85,9 @@ describe.skip ('tests for service registering route', ()=>{
       service_url: 'http://test2.com',
     };
 
-    await mockRequest.post('/service-register').send(blogService1);
+    await mockRequest.post('/api/v1/service-register').send(blogService1);
 
-    await mockRequest.post('/service-register').send(blogService2);
+    await mockRequest.post('/api/v1/service-register').send(blogService2);
 
     expect(global.services[blogService1.service_name].urls).toStrictEqual([blogService1.service_url, blogService2.service_url]);
 
