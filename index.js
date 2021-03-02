@@ -55,6 +55,7 @@ app.listen(port, ()=>{
   console.log(' curernt service list:', global.services);
 });
 
+module.exports = app;
 
 
 
