@@ -1,26 +1,42 @@
-# Microservices: API Gateway
+# Microservices Architecture
 
 This is my first time using microservice architecture to build a backend system to power up all my apps and blog website, and it will continue growing to support all my future development too.
 
 ![architecture-image](./docs/img/architecture.png)
 
-The blog website front end is still under development:
-[pengchen.work](https://github.com/PengChen11/pengchen.work)
-Tech will be used: NextJS (Mainly for SEO)
+---
 
-Currently I have the following services in development:
+## Currently supported front ends
 
-**Authentication service** : for user security concern, it is made private.
+[https://pengchen.work](https://pengchen.work)
 
-[Blog service](https://github.com/PengChen11/Microservices-Blog)
+My main blogging and portfolio website. Partially done. Still under development.
 
-[System monitoring service](https://github.com/PengChen11/Microservices-Sys_Monitor)
+[Click here to see Github Repo](https://github.com/PengChen11/pengchen.work)
+
+---
+
+## Current back end microservices list
+
+**Authentication service** : Handles user authentication and microservices internal authentications.
+
+for user security concern, it is made private.
+
+[**Blog service :**](https://github.com/PengChen11/Microservices-Blog) Handles CRUD operations for blogging. Includes my projects, and articles that I wrote. (click to redirect to repo)
+
+[**System monitoring service :**](https://github.com/PengChen11/Microservices-Sys_Monitor) Handles system monitoring need. Can record system errors, warnings and events for all microservices. (click to redirect to repo)
+
+[**API gateway :**](./docs/gateway_readme.md) Handles all external requests and apply authorization control. Click it to see full tech details.
+
+---
 
 ## Table of Contents
 
 ---
 
-- [Microservices: API Gateway](#microservices-api-gateway)
+- [Microservices Architecture](#microservices-architecture)
+  - [Currently supported front ends](#currently-supported-front-ends)
+  - [Current back end microservices list](#current-back-end-microservices-list)
   - [Table of Contents](#table-of-contents)
   - [**Overview**](#overview)
     - [**What is a Microservice?**](#what-is-a-microservice)

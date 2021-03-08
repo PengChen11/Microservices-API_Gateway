@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (req, res, next) => {
 
-  const ip = req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress || 'No IP detected';
+  let ip = req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress || 'No IP detected';
   const time = new Date();
 
 
