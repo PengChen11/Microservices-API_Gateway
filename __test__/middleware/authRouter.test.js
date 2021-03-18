@@ -158,8 +158,50 @@ describe('/signin route tests', ()=>{
     const result = await mockRequest.post('/api/v1/auth/signin').auth('badusername', 'badpassword');
     expect(result.status).toBe(401);
   });
+
+  test ( 'should allow user signin with good Credential', async ()=>{
+    axios.mockImplementation(() => Promise.resolve({
+      data: {
+        token: 'token',
+        user: {
+          username:'test',
+        },
+      },
+    }));
+
+    const result = await mockRequest.post('/api/v1/auth/signin').auth('goodusername', 'goodpassword');
+    expect(result.status).toBe(200);
+  });
 });
 
+describe('/allusers route tests', ()=>{
+
+  it ('should block non admin access all users data', async()=>{
+    axios.mockImplementation(() => Promise.resolve({
+      data: {
+        username: 'testuser',
+        role:'user',
+      },
+    }));
+
+    const result = await mockRequest.get('/api/v1/auth/allusers').auth( 'token', { type: 'bearer' } );
+
+    expect(result.status).toBe(401);
+  });
+
+  it ('should block non admin access all users data', async()=>{
+    axios.mockImplementation(() => Promise.resolve({
+      data: {
+        username: 'testadmin',
+        role:'admin',
+      },
+    }));
+
+    const result = await mockRequest.get('/api/v1/auth/allusers').auth( 'token', { type: 'bearer' } );
+
+    expect(result.status).toBe(200);
+  });
+});
 
 
 
