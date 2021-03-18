@@ -23,9 +23,8 @@ authRouter.post('/signup', roleValidation, dataValidation, signup);
 // admin signup, admin can be only added by another admin.
 authRouter.post('/adminsignup', bearerAuth, adminValidation, dataValidation, adminSignup); 
 
-// micerservice signup, microservice can only be added by admin.
-authRouter.post('/servicesignup', bearerAuth, adminValidation, dataValidation, adminSignup); 
-
+// admin-portal singin route
+// authRouter.post('/adminverify', bearerAuth, adminValidation, (req, res, next)=>res.send('ok') );
 
 authRouter.post('/signin', basicAuth, signin);
 
