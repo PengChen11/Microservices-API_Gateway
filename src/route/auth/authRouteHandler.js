@@ -72,7 +72,10 @@ async function adminSignup (req, res, next){
 }
 
 async function signin (req, res, next){
-  res.send({token: req.token});
+  res.send({
+    token: req.token,
+    user: req.user,
+  });
 }
 
 function handlerGenerator (method){

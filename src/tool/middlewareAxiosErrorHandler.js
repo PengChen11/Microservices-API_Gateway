@@ -6,9 +6,9 @@ module.exports = (error, noConnectionErr, next, serviceName, serviceURL)=>{
 
   if (!error.response) {
     serviceRemover(serviceName, serviceURL);
-    return next(noConnectionErr);
+    next(noConnectionErr);
   } else {
     const receivedError = {'message_spec':error.response.data , 'statusCode': error.response.status, 'statusMessage': error.response.statusText };
-    return next(receivedError);
+    next(receivedError);
   }
 };

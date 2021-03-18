@@ -36,8 +36,9 @@ module.exports = async (req, res, next)=>{
     };
 
     try{
-      const response = await axios(reqConfig);
-      req.token = response.data.token;
+      const {data} = await axios(reqConfig);
+      req.token = data.token;
+      req.user = data.user;
       next();
       return;
     }
