@@ -9,6 +9,7 @@ module.exports = async (req, res, next) => {
 
   if (!req.headers.authorization) {
     next(authenticationErr);
+    return;
   }
 
   const token = req.headers.authorization.split(' ').pop();
