@@ -33,6 +33,7 @@ function handlerGenerator (method){
         reqConfig = {
           method: 'get',
           url: `${monitorServiceURL}/${modelPath}`,
+          params: req.query,
         }; 
         break;
 
@@ -48,6 +49,7 @@ function handlerGenerator (method){
           method: 'get',
           url: `${monitorServiceURL}/${modelPath}/service/${serviceName}`,
           data: req.body,
+          params: req.query,
         }; 
         break;
 

@@ -96,6 +96,7 @@ function handlerGenerator (method){
           headers: {
             Authorization: `Bearer ${req.token}`,
           },
+          params: req.query,
         }; 
         break;
 
