@@ -38,6 +38,7 @@ describe('Blog routes tests', ()=>{
     const  reqConfig = {
       method: 'get',
       url: 'http://test2.com/articles',
+      params: {},
     }; 
     
     await mockRequest.get('/api/v1/blog/articles');
