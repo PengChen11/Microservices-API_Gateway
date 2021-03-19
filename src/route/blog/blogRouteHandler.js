@@ -32,6 +32,7 @@ function handlerGenerator (method){
         reqConfig = {
           method: 'get',
           url: `${blogServiceURL}/${modelPath}`,
+          params: req.query,
         }; 
         break;
 
